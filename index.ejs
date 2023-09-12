@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Posts</title>
+  </head>
+  <body>
+
+    <form action="/createPost"  method="post">
+      <input type="text" name="media" placeholder="Enter the media">
+      <input type="text" name="caption" placeholder="Enter the caption">
+      <input type="submit">
+    </form>
+
+    <h1>Create Story</h1>
+    <form action="/createStory" method="post">
+      <input type="text" name="media" placeholder="Enter media">
+      <input type="text" name="caption" placeholder="Enter caption">
+      <input type="submit">
+    </form>
+       <br>
+     <div id="stories" class="d-flex gap-2">
+         <% stories.forEach(story=>{%>
+
+         <div class="story">
+            <img height="100" style="border-radius:50%;" src="<%= story.media %>" alt="">
+         </div>
+         <%})%>
+     </div>
+
+    <div id="main" class="d-flex gap-2 mt-1 p-3">
+
+     
+        
+       <% allPosts.forEach(post=>{ %>
+        <div class="card" style="width: 18rem;">
+          <div class="text d-flex justify-content-between">
+            <h5 class="card-title"><%= post.user.username %></h5>
+            <a class="btn" href="/follow/<%= post.user._id %>">
+             <i class="ri-user-add-line"></i>
+            </a>
+          </div>
+          <img src="<%= post.media %>" height=250 class="card-img-top" alt="...">
+          <div class="card-body">
+           
+            <p class="card-text"><%= post.caption%></p>
+            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+            <div class="buttons">
+                <div class="text" style="text-align: center;">
+                   
+                   <a class="btn btn-success" href="/like/<%= post._id %>">
+                      <% if(post.Likes.includes(user._id)){%>
+                        <i class="ri-heart-fill text-danger" ></i>
+                      
+                      <% }else {%>
+                        <i class="ri-heart-line text-danger"></i>
+                      <% } %>
+                    
+                   </a>
+                   <p><%=post.Likes.length %></p>
+                </div>
+            </div>
+          </div>
+        </div>
+       <% }) %>
+          
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    
+  </body>
+</html>
+
+
+
+<!-- <form action="/createPost"  method="post">
+  <input type="text" name="media" placeholder="Enter the media">
+  <input type="text" name="caption" placeholder="Enter the caption">
+  <input type="submit">
+</form> -->
+
